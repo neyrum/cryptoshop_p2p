@@ -1,9 +1,3 @@
-const supabase = Supabase.createClient('https://uxutligzjolfnmajuvcc.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV4dXRsaWd6am9sZm5tYWp1dmNjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDE5NjEyNTAsImV4cCI6MjA1NzUzNzI1MH0.pMtPmaMRAS11kgeSdP_GW3FaNX4m9Vr5_qL12lfsUQ8');
-
-let currentUser = null;
-let currentChatRoom = null;
-let cart = [];
-
 document.addEventListener('DOMContentLoaded', function() {
   console.log('DOM cargado, inicializando...');
   checkAuth();
@@ -337,3 +331,9 @@ async function isAdmin() {
   if (error) console.error('Error al verificar admin:', error.message);
   return data?.is_admin || false;
 }
+
+const supabase = Supabase.createClient('https://uxutligzjolfnmajuvcc.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV4dXRsaWd6am9sZm5tYWp1dmNjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDE5NjEyNTAsImV4cCI6MjA1NzUzNzI1MH0.pMtPmaMRAS11kgeSdP_GW3FaNX4m9Vr5_qL12lfsUQ8');
+
+let currentUser = null;
+let currentChatRoom = null;
+let cart = [];
