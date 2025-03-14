@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CryptoShopP2P</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="https://uxutligzjolfnmajuvcc.supabase.co/storage/v1/object/public/website-assets/favicon.png" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <!-- Encabezado inspirado en Amazon -->
+  <header class="amazon-header">
+    <div class="logo">
+      <img src="https://uxutligzjolfnmajuvcc.supabase.co/storage/v1/object/public/website-assets/logo.png" alt="CryptoShopP2P Logo" style="height: 40px;">
+      <h1>CryptoShop P2P</h1> <!-- Título ajustado sin espacios -->
+    </div>
+    <nav class="amazon-nav">
+      <div class="nav-right">
+        <span id="hello" class="nav-item">Hola, Identifícate</span>
+        <div id="cartBtn" class="cart-button">
+          <i class="fas fa-shopping-cart"></i>
+          <span id="cartCount" style="display: none;">0</span>      
+    </nav>
+  </header>
+
+  <!-- Barra de navegación secundaria -->
+  <nav class="secondary-nav">
+    <span class="nav-item">Todo</span>
+    <span class="nav-item">Criptomonedas</span>
+    <span class="nav-item">Ofertas P2P</span>
+    <span class="nav-item">Servicios</span>
+  </nav>
+
+  <!-- Banner Principal -->
+  <section class="banner">
+    <div class="banner-content">
+      <h1>¡Compra y Vende Criptomonedas con CryptoShopP2P!</h1>
+      <p>Explora las mejores ofertas de Bitcoin, Ethereum y más.</p>
+    </div>
+  </section>
+
+  <!-- Sección de Ofertas -->
+  <section id="offersSection" class="grid">
+    <h2>Ofertas P2P Disponibles</h2>
+    <div id="offers" class="grid"></div>
+  </section>
+
+  <!-- Sección KYC -->
+  <section id="kyc" class="auth-container" style="display: none;">
+    <h2>Verificación KYC</h2>
+    <input type="file" id="kycFile">
+    <button onclick="uploadKYC()">Subir Documento</button>
+  </section>
+
+  <!-- Sección para Crear Oferta -->
+  <section id="createOfferSection" class="form-container" style="display: none;">
+    <h2>Publicar Oferta</h2>
+    <input type="text" id="offerTitle" placeholder="Título (ej: 1 BTC por $60,000)">
+    <select id="cryptoType">
+      <option value="BTC">Bitcoin (BTC)</option>
+      <option value="ETH">Ethereum (ETH)</option>
+      <option value="USDT">Tether (USDT)</option>
+    </select>
+    <input type="number" id="quantity" placeholder="Cantidad">
+    <input type="number" id="price" placeholder="Precio por unidad">
+    <input type="text" id="paymentMethod" placeholder="Método de Pago">
+    <input type="file" id="offerImage" accept="image/*">
+    <button onclick="createOffer()">Publicar</button>
+  </section>
+
+  <!-- Carrito -->
+  <div id="cart" class="cart-container" style="display: none;">
+    <div class="cart-header">
+      <h2>Carrito de Compras</h2>
+      <button onclick="toggleCart()" class="cart-close">Cerrar</button>
+    </div>
+    <div id="cartItems"></div>
+    <button onclick="clearCart()" class="cart-clear">Vaciar Carrito</button>
+  </div>
+
+  <!-- Chat -->
+  <div id="chat" class="chat-container" style="display: none;">
+    <h3>Chat</h3>
+    <div id="messages"></div>
+    <input type="text" id="chatInput" placeholder="Escribe un mensaje">
+    <button onclick="sendMessage()">Enviar</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="script.js"></script>
+</body>
+</html>

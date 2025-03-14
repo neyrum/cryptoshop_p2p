@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Admin</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .notification-form { max-width: 400px; margin: 0 auto; }
+    input, button { display: block; width: 100%; margin: 10px 0; padding: 10px; }
+    button { background-color: #ff9900; color: white; border: none; cursor: pointer; }
+    button:hover { background-color: #e68a00; }
+  </style>
+</head>
+<body>
+  <h1>Panel de Admin</h1>
+  <div class="notification-form">
+    <input type="text" id="userId" placeholder="ID del usuario">
+    <input type="text" id="message" placeholder="Mensaje de notificación">
+    <button onclick="sendNotification()">Enviar Notificación</button>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const supabase = Supabase.createClient('https://uxutligzjolfnmajuvcc.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV4dXRsaWd6am9sZm5tYWp1dmNjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDE4OTA4NzcsImV4cCI6MjA1NzQ2Njg3N30._PONWXVfw2IV1LKgRgH3RSHbwz3tHNVG1zakU_zRDU0');
+
+    async function sendNotification() {
+      const userId = document.getElementById('userId').value;
+      const message = document.getElementById('message').value;
+      const { error } = await supabase.from('notifications').insert({ user_id: userId, message });
+      if (error) {
+        console.error('Error al enviar notificación:', error.message);
+        alert('Error al enviar notificación: ' + error.message);
+      } else {
+        alert('Notificación enviada');
+        document.getElementById('userId').value = '';
+        document.getElementById('message').value = '';
+      }
+    }
+  </script>
+</body>
+</html>

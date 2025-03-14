@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autenticación - CryptoShop P2P</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="https://uxutligzjolfnmajuvcc.supabase.co/storage/v1/object/public/website-assets/favicon.png" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="https://uxutligzjolfnmajuvcc.supabase.co/storage/v1/object/public/website-assets/logo.png" alt="CryptoShop P2P Logo" style="height: 40px;">
+      <h1>CryptoShop P2P</h1>
+    </div>
+    <nav>
+      <div id="authSection" class="auth-nav">
+        <span id="hello">Hola, Identifícate</span>
+        <div id="cartBtn" class="cart-button" style="display: none;">
+          <i class="fas fa-shopping-cart"></i>
+          <span id="cartCount" style="display: none;">0</span>
+        </div>
+      </div>
+      <button id="logout" style="display: none;">Cerrar Sesión</button>
+      <a href="admin.html" id="adminLink" style="display: none;">Panel Admin</a>
+    </nav>
+  </header>
+
+  <div class="auth-wrapper">
+    <section id="authContainer" class="auth-container">
+      <!-- Formulario de Login -->
+      <section id="login" class="auth-form" style="display: block;">
+        <h1>Iniciar sesión</h1>
+        <form id="loginForm">
+          <input type="text" id="loginEmail" placeholder="E-mail o celular" class="amazon-input">
+          <input type="password" id="loginPassword" placeholder="Contraseña" class="amazon-input">
+          <button type="button" onclick="login()" class="amazon-button">Continuar</button>
+        </form>
+        <p class="terms">Al continuar, aceptas las <a href="#">Condiciones de Uso</a> y el <a href="#">Aviso de Privacidad</a> de CryptoShop P2P.</p>
+        <p>¿Necesitas ayuda? <a href="#">Más información</a></p>
+        <hr>
+        <p>¿Nuevo en CryptoShop P2P? <span onclick="showRegister()" style="color: #0066c0; cursor: pointer;">Crear tu cuenta de CryptoShop</span></p>
+      </section>
+
+      <!-- Formulario de Registro -->
+      <section id="register" class="auth-form" style="display: none;">
+        <h1>Crear cuenta</h1>
+        <p>Todos los campos son obligatorios</p>
+        <form id="registerForm">
+          <input type="text" id="regName" placeholder="Tu nombre" class="amazon-input">
+          <input type="text" id="regPhoneEmail" placeholder="E-mail o número de celular" class="amazon-input">
+          <input type="password" id="regPassword" placeholder="Contraseña (mínimo 6 caracteres)" class="amazon-input">
+          <input type="password" id="regConfirmPassword" placeholder="Vuelve a escribir la contraseña" class="amazon-input">
+          <button type="button" onclick="signup()" class="amazon-button">Continuar</button>
+        </form>
+        <p class="terms">Al crear una cuenta, aceptas las <a href="#">Condiciones de Uso</a> y el <a href="#">Aviso de Privacidad</a> de CryptoShop P2P.</p>
+        <p>¿Ya tienes una cuenta? <span onclick="showLogin()" style="color: #0066c0; cursor: pointer;">Inicia sesión</span></p>
+      </section>
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="script.js"></script>
+  <script>
+    // Función para mostrar el formulario de login
+    function showLogin() {
+      document.getElementById('login').style.display = 'block';
+      document.getElementById('register').style.display = 'none';
+      console.log('Formulario de login mostrado');
+    }
+
+    // Función para mostrar el formulario de registro
+    function showRegister() {
+      document.getElementById('login').style.display = 'none';
+      document.getElementById('register').style.display = 'block';
+      console.log('Formulario de registro mostrado');
+    }
+
+    // Función de login
+    async function login() {
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+      console.log('Intentando iniciar sesión con:', email);
+
+      if (!email || !password) {
+        alert('Por favor, completa todos los campos.');
+        return;
+      }
+
+      const supabase = Supabase.createClient('https://uxutligzjolfnmajuvcc.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV4dXRsaWd6am9sZm5tYWp1dmNjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDE5NjEyNTAsImV4cCI6MjA1NzUzNzI1MH0.pMtPmaMRAS11kgeSdP_GW3FaNX4m9Vr5_qL12lfsUQ8');
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: email.includes('@') ? email : null,
+        password: password
+      });
+      if (error) {
+        console.error('Error al iniciar sesión:', error.message);
+        alert('Error al iniciar sesión: ' + error.message);
+      } else {
+        currentUser = data.user;
+        console.log('Usuario autenticado:', currentUser);
+        setupRealtimeSubscriptions();
+        updateUI();
+        window.location.href = 'index.html';
+      }
+    }
+
+    // Función de registro
+    async function signup() {
+      const name = document.getElementById('regName').value;
+      const phoneEmail = document.getElementById('regPhoneEmail').value;
+      const password = document.getElementById('regPassword').value;
+      const confirmPassword = document.getElementById('regConfirmPassword').value;
+
+      if (password.length < 6) {
+        alert('La contraseña debe tener al menos 6 caracteres.');
+        return;
+      }
+      if (password !== confirmPassword) {
+        alert('Las contraseñas no coinciden.');
+        return;
+      }
+
+      console.log('Intentando registrar usuario con:', phoneEmail);
+      const supabase = Supabase.createClient('https://uxutligzjolfnmajuvcc.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV4dXRsaWd6am9sZm5tYWp1dmNjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDE5NjEyNTAsImV4cCI6MjA1NzUzNzI1MH0.pMtPmaMRAS11kgeSdP_GW3FaNX4m9Vr5_qL12lfsUQ8');
+      const { data, error } = await supabase.auth.signUp({ email: phoneEmail, password });
+      if (error) {
+        console.error('Error al registrarse:', error.message);
+        alert('Error al registrarse: ' + error.message);
+      } else {
+        console.log('Usuario registrado en Supabase:', data.user);
+        const { error: insertError } = await supabase.from('users').insert({
+          id: data.user.id,
+          email: phoneEmail,
+          username: name.split(' ')[0],
+          kyc_verified: false,
+          is_admin: false
+        });
+        if (insertError) {
+          console.error('Error al insertar en tabla users:', insertError.message);
+          alert('Error al guardar usuario en la base de datos: ' + insertError.message);
+        } else {
+          console.log('Usuario guardado en tabla users');
+          alert('Registro exitoso. Por favor, inicia sesión.');
+          showLogin();
+        }
+      }
+    }
+  </script>
+</body>
+</html>

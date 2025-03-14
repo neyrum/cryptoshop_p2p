@@ -1,0 +1,410 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Estilos para el Encabezado (usado en ambas páginas) */
+header {
+  background-color: #232f3e;
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+}
+
+/* Encabezado estilo Amazon (para index.html) */
+.amazon-header {
+  background-color: #131921;
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+}
+
+.logo img {
+  height: 40px;
+}
+
+.logo h1 {
+  margin: 0;
+  font-size: 24px;
+  color: white;
+  font-weight: normal; /* Para que coincida con el estilo de register.html */
+  white-space: nowrap; /* Asegura que el texto no se divida en varias líneas */
+}
+
+nav {
+  display: flex;
+  align-items: center;
+}
+
+.amazon-nav {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+}
+
+.nav-item {
+  color: white;
+  margin: 0 15px;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.nav-item:hover {
+  color: #febd69;
+}
+
+/* Barra de navegación secundaria (para index.html) */
+.secondary-nav {
+  background-color: #232f3e;
+  padding: 5px 20px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #3a4553;
+}
+
+.secondary-nav .nav-item {
+  margin: 0 10px;
+  font-size: 13px;
+}
+
+#hello {
+  cursor: pointer;
+}
+
+.cart-button {
+  margin-left: 20px;
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.cart-button .fa-shopping-cart {
+  font-size: 24px;
+  color: white;
+}
+
+#cartCount {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: #f08804;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 50%;
+  padding: 2px 6px;
+}
+
+/* Banner estilo Amazon (para index.html) */
+.banner {
+  background: linear-gradient(90deg, #232f3e, #4a90e2);
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.banner-content h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.banner-content p {
+  font-size: 16px;
+}
+
+/* Estilos para los Formularios (register.html) */
+.auth-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f3f3f3;
+}
+
+.auth-container {
+  width: 350px;
+  padding: 20px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.auth-form {
+  text-align: center;
+}
+
+.auth-form h1 {
+  font-size: 28px;
+  font-weight: normal;
+  margin-bottom: 20px;
+  color: #0f1111;
+}
+
+.auth-form p {
+  font-size: 13px;
+  color: #555;
+  margin: 10px 0;
+}
+
+.auth-form a {
+  color: #0066c0;
+  text-decoration: none;
+}
+
+.auth-form .terms a {
+  color: #0066c0;
+}
+
+.amazon-input {
+  width: 100%;
+  height: 40px;
+  margin-bottom: 10px;
+  padding: 8px;
+  border: 1px solid #a6a6a6;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.amazon-input:focus {
+  border-color: #e77600;
+  outline: none;
+  box-shadow: 0 0 3px rgba(228, 121, 17, 0.5);
+}
+
+.amazon-button {
+  width: 100%;
+  height: 40px;
+  background-color: #ffd814;
+  border: 1px solid #f3c510;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.amazon-button:hover {
+  background-color: #f7ca00;
+  border-color: #f2c200;
+}
+
+.auth-form hr {
+  border: 0;
+  height: 1px;
+  background: #ddd;
+  margin: 20px 0;
+}
+
+/* Sección de Ofertas (index.html) */
+#offersSection {
+  padding: 20px;
+  background-color: #f3f3f3;
+}
+
+#offersSection h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #0f1111;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.card img {
+  max-width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.card h3 {
+  font-size: 16px;
+  margin: 10px 0;
+  color: #0f1111;
+}
+
+.card p {
+  font-size: 14px;
+  color: #555;
+  margin: 5px 0;
+}
+
+.card .stars {
+  color: #f08804;
+  font-size: 14px;
+}
+
+.card button {
+  background-color: #ffd814;
+  border: 1px solid #f3c510;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.card button:hover {
+  background-color: #f7ca00;
+  border-color: #f2c200;
+}
+
+/* Estilo del Carrito (index.html) */
+.cart-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 400px;
+  height: 100vh;
+  background: white;
+  box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+  padding: 20px;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.cart-header h2 {
+  font-size: 20px;
+  color: #0f1111;
+}
+
+.cart-close {
+  background: none;
+  border: none;
+  font-size: 14px;
+  color: #0066c0;
+  cursor: pointer;
+}
+
+#cartItems div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.cart-clear {
+  width: 100%;
+  padding: 10px;
+  background-color: #ffd814;
+  border: 1px solid #f3c510;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.cart-clear:hover {
+  background-color: #f7ca00;
+  border-color: #f2c200;
+}
+
+/* Estilo de otras secciones (KYC y Crear Oferta en index.html) */
+.form-container {
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.form-container h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #0f1111;
+}
+
+.form-container input, .form-container select {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #a6a6a6;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.form-container button {
+  width: 100%;
+  padding: 10px;
+  background-color: #ffd814;
+  border: 1px solid #f3c510;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.form-container button:hover {
+  background-color: #f7ca00;
+  border-color: #f2c200;
+}
+
+/* Chat (sin cambios) */
+.chat-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 300px;
+  background: white;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+#messages {
+  max-height: 200px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
