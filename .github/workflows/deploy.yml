@@ -1,0 +1,28 @@
+name: Deploy to Netlify  # Nombre del workflow
+on:
+  push:
+    branches: [main]     # Se activa al hacer push a la rama main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest  # Entorno de ejecución
+
+    steps:
+      # Paso 1: Obtener el código del repositorio
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # Paso 2: Generar config.js con variables de entorno
+      - name: Generate Config File
+        run: |
+          echo "const SUPABASE_URL = '${{ secrets.SUPABASE_URL }}';" > public/config.js
+          echo "const SUPABASE_KEY = '${{ secrets.SUPABASE_KEY }}';" >> public/config.js
+
+      # Paso 3: Desplegar en Netlify (ejemplo)
+      - name: Deploy to Netlify
+        uses: netlify/actions/cli@master
+        with:
+          args: deploy --dir=public --prod  # Carpeta a desplegar
+        env:
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
